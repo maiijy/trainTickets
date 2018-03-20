@@ -1,0 +1,74 @@
+html,body{
+    height:100%;
+    margin: 0;
+}
+
+#contanier{
+    height: 100%;
+    margin:auto;
+}
+
+#north{
+    height: 10%;
+    border-width: 1px;
+    background-color:#418bca;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+.title{
+    font-size: 20px;
+    float: left;
+    line-height:50px;
+}
+
+#west{
+    width:15%;
+}
+
+.head_title{
+    height: 5%;
+}
+
+.optionBtn{
+    height: auto;
+    background-color:#F4F4F4;
+}
+#stations_list{
+    height:350px;
+}
+
+#south{
+    height: 5%;
+    background-color: #D2E0F2;
+}
+
+.tag{
+    text-align: center;
+    color: #8d8d8d;
+    line-height:30px;
+    font-size: 13px;
+}
+
+.northP{
+    display: inline-block;
+    line-height: 62px;
+    font-size: 18px;
+    color:white;
+}
+
+.northP li{
+    float: left;
+}
+
+.title_logo{
+    font-size: 15px;
+    color:white;
+    position: fixed;
+    top:10px;
+    right: 10px;
+}
+
+.title_logo a{
+    color:white;
+}

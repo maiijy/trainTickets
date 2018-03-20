@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mxt.dao.MotorVehicleMapper" >
+  <resultMap id="BaseResultMap" type="com.mxt.entity.MotorVehicle" >
+    <id column="motor_id" property="motorId" jdbcType="INTEGER" />
+    <result column="motor_name" property="motorName" jdbcType="VARCHAR" />
+    <result column="car_name" property="carName" jdbcType="VARCHAR" />
+    <result column="car_type" property="carType" jdbcType="VARCHAR" />
+    <result column="start_name" property="startName" jdbcType="VARCHAR" />
+    <result column="end_name" property="endName" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="VARCHAR" />
+    <result column="end_time" property="endTime" jdbcType="VARCHAR" />
+    <result column="miles" property="miles" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    motor_id, motor_name, car_name, car_type, start_name, end_name, start_time, end_time, 
+    miles
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from motor_vehicle
+  </select>
+  <select id="selectByStartAndEnd" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from motor_vehicle
+    where start_name = #{0} and end_name = #{1}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from motor_vehicle
+    where motor_id = #{motorId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from motor_vehicle
+    where motor_id = #{motorId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mxt.entity.MotorVehicle" >
+    insert into motor_vehicle (motor_id, motor_name, car_name, 
+      car_type, start_name, end_name, 
+      start_time, end_time, miles
+      )
+    values (#{motorId,jdbcType=INTEGER}, #{motorName,jdbcType=VARCHAR}, #{carName,jdbcType=VARCHAR}, 
+      #{carType,jdbcType=VARCHAR}, #{startName,jdbcType=VARCHAR}, #{endName,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR}, #{miles,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mxt.entity.MotorVehicle" >
+    insert into motor_vehicle
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="motorId != null" >
+        motor_id,
+      </if>
+      <if test="motorName != null" >
+        motor_name,
+      </if>
+      <if test="carName != null" >
+        car_name,
+      </if>
+      <if test="carType != null" >
+        car_type,
+      </if>
+      <if test="startName != null" >
+        start_name,
+      </if>
+      <if test="endName != null" >
+        end_name,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="miles != null" >
+        miles,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="motorId != null" >
+        #{motorId,jdbcType=INTEGER},
+      </if>
+      <if test="motorName != null" >
+        #{motorName,jdbcType=VARCHAR},
+      </if>
+      <if test="carName != null" >
+        #{carName,jdbcType=VARCHAR},
+      </if>
+      <if test="carType != null" >
+        #{carType,jdbcType=VARCHAR},
+      </if>
+      <if test="startName != null" >
+        #{startName,jdbcType=VARCHAR},
+      </if>
+      <if test="endName != null" >
+        #{endName,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="miles != null" >
+        #{miles,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mxt.entity.MotorVehicle" >
+    update motor_vehicle
+    <set >
+      <if test="motorName != null" >
+        motor_name = #{motorName,jdbcType=VARCHAR},
+      </if>
+      <if test="carName != null" >
+        car_name = #{carName,jdbcType=VARCHAR},
+      </if>
+      <if test="carType != null" >
+        car_type = #{carType,jdbcType=VARCHAR},
+      </if>
+      <if test="startName != null" >
+        start_name = #{startName,jdbcType=VARCHAR},
+      </if>
+      <if test="endName != null" >
+        end_name = #{endName,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="miles != null" >
+        miles = #{miles,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where motor_id = #{motorId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mxt.entity.MotorVehicle" >
+    update motor_vehicle
+    set motor_name = #{motorName,jdbcType=VARCHAR},
+      car_name = #{carName,jdbcType=VARCHAR},
+      car_type = #{carType,jdbcType=VARCHAR},
+      start_name = #{startName,jdbcType=VARCHAR},
+      end_name = #{endName,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR},
+      miles = #{miles,jdbcType=VARCHAR}
+    where motor_id = #{motorId,jdbcType=INTEGER}
+  </update>
+  <select id="selectMotorsByNum" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from motor_vehicle
+    order by motor_id  limit #{num,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}
+  </select>
+  <select id="getCount" resultType="java.lang.Integer">
+    select count(*)from motor_vehicle
+  </select>
+</mapper>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mxt.dao.TrainlineMapper">
+  <resultMap id="BaseResultMap" type="com.mxt.entity.Trainline">
+    <id column="tl_id" jdbcType="INTEGER" property="tlId" />
+    <result column="motor_name" jdbcType="VARCHAR" property="motorName" />
+    <result column="station_num" jdbcType="INTEGER" property="stationNum" />
+    <result column="station_name" jdbcType="VARCHAR" property="stationName" />
+    <result column="arrive_time" jdbcType="VARCHAR" property="arriveTime" />
+    <result column="start_time" jdbcType="VARCHAR" property="startTime" />
+    <result column="residence_time" jdbcType="VARCHAR" property="residenceTime" />
+    <result column="distance" jdbcType="DOUBLE" property="distance" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    tl_id, motor_name, station_num, station_name, arrive_time, start_time, residence_time, 
+    distance
+  </sql>
+  <select id="selectByMotorName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from trainline
+    where motor_name = #{motorName,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from trainline
+    where tl_id = #{tlId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from trainline
+    where tl_id = #{tlId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mxt.entity.Trainline">
+    insert into trainline (tl_id, motor_name, station_num, 
+      station_name, arrive_time, start_time, 
+      residence_time, distance)
+    values (#{tlId,jdbcType=INTEGER}, #{motorName,jdbcType=VARCHAR}, #{stationNum,jdbcType=INTEGER}, 
+      #{stationName,jdbcType=VARCHAR}, #{arriveTime,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, 
+      #{residenceTime,jdbcType=VARCHAR}, #{distance,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mxt.entity.Trainline">
+    insert into trainline
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tlId != null">
+        tl_id,
+      </if>
+      <if test="motorName != null">
+        motor_name,
+      </if>
+      <if test="stationNum != null">
+        station_num,
+      </if>
+      <if test="stationName != null">
+        station_name,
+      </if>
+      <if test="arriveTime != null">
+        arrive_time,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="residenceTime != null">
+        residence_time,
+      </if>
+      <if test="distance != null">
+        distance,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tlId != null">
+        #{tlId,jdbcType=INTEGER},
+      </if>
+      <if test="motorName != null">
+        #{motorName,jdbcType=VARCHAR},
+      </if>
+      <if test="stationNum != null">
+        #{stationNum,jdbcType=INTEGER},
+      </if>
+      <if test="stationName != null">
+        #{stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="arriveTime != null">
+        #{arriveTime,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="residenceTime != null">
+        #{residenceTime,jdbcType=VARCHAR},
+      </if>
+      <if test="distance != null">
+        #{distance,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mxt.entity.Trainline">
+    update trainline
+    <set>
+      <if test="motorName != null">
+        motor_name = #{motorName,jdbcType=VARCHAR},
+      </if>
+      <if test="stationNum != null">
+        station_num = #{stationNum,jdbcType=INTEGER},
+      </if>
+      <if test="stationName != null">
+        station_name = #{stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="arriveTime != null">
+        arrive_time = #{arriveTime,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="residenceTime != null">
+        residence_time = #{residenceTime,jdbcType=VARCHAR},
+      </if>
+      <if test="distance != null">
+        distance = #{distance,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where tl_id = #{tlId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mxt.entity.Trainline">
+    update trainline
+    set motor_name = #{motorName,jdbcType=VARCHAR},
+      station_num = #{stationNum,jdbcType=INTEGER},
+      station_name = #{stationName,jdbcType=VARCHAR},
+      arrive_time = #{arriveTime,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=VARCHAR},
+      residence_time = #{residenceTime,jdbcType=VARCHAR},
+      distance = #{distance,jdbcType=DOUBLE}
+    where tl_id = #{tlId,jdbcType=INTEGER}
+  </update>
+</mapper>

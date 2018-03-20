@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mxt.dao.StationsMapper" >
+  <resultMap id="BaseResultMap" type="com.mxt.entity.Stations" >
+    <id column="station_id" property="stationId" jdbcType="INTEGER" />
+    <result column="station_name" property="stationName" jdbcType="VARCHAR" />
+    <result column="station_addr" property="stationAddr" jdbcType="VARCHAR" />
+    <result column="station_railway" property="stationRailway" jdbcType="VARCHAR" />
+    <result column="station_lng" property="stationLng" jdbcType="VARCHAR" />
+    <result column="station_lat" property="stationLat" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    station_id, station_name, station_addr, station_railway, station_lng, station_lat
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from stations
+    where station_id = #{stationId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from stations
+    where station_id = #{stationId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mxt.entity.Stations" >
+    insert into stations (station_id, station_name, station_addr, 
+      station_railway, station_lng, station_lat
+      )
+    values (#{stationId,jdbcType=INTEGER}, #{stationName,jdbcType=VARCHAR}, #{stationAddr,jdbcType=VARCHAR}, 
+      #{stationRailway,jdbcType=VARCHAR}, #{stationLng,jdbcType=VARCHAR}, #{stationLat,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mxt.entity.Stations" >
+    insert into stations
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stationId != null" >
+        station_id,
+      </if>
+      <if test="stationName != null" >
+        station_name,
+      </if>
+      <if test="stationAddr != null" >
+        station_addr,
+      </if>
+      <if test="stationRailway != null" >
+        station_railway,
+      </if>
+      <if test="stationLng != null" >
+        station_lng,
+      </if>
+      <if test="stationLat != null" >
+        station_lat,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stationId != null" >
+        #{stationId,jdbcType=INTEGER},
+      </if>
+      <if test="stationName != null" >
+        #{stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="stationAddr != null" >
+        #{stationAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="stationRailway != null" >
+        #{stationRailway,jdbcType=VARCHAR},
+      </if>
+      <if test="stationLng != null" >
+        #{stationLng,jdbcType=VARCHAR},
+      </if>
+      <if test="stationLat != null" >
+        #{stationLat,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mxt.entity.Stations" >
+    update stations
+    <set >
+      <if test="stationName != null" >
+        station_name = #{stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="stationAddr != null" >
+        station_addr = #{stationAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="stationRailway != null" >
+        station_railway = #{stationRailway,jdbcType=VARCHAR},
+      </if>
+      <if test="stationLng != null" >
+        station_lng = #{stationLng,jdbcType=VARCHAR},
+      </if>
+      <if test="stationLat != null" >
+        station_lat = #{stationLat,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where station_id = #{stationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mxt.entity.Stations" >
+    update stations
+    set station_name = #{stationName,jdbcType=VARCHAR},
+      station_addr = #{stationAddr,jdbcType=VARCHAR},
+      station_railway = #{stationRailway,jdbcType=VARCHAR},
+      station_lng = #{stationLng,jdbcType=VARCHAR},
+      station_lat = #{stationLat,jdbcType=VARCHAR}
+    where station_id = #{stationId,jdbcType=INTEGER}
+  </update>
+  <select id="selectStationByNum" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from stations
+    order by station_id  limit #{num,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}
+  </select>
+  <select id="getCount" resultType="java.lang.Integer">
+    select count(*)from stations
+  </select>
+</mapper>
